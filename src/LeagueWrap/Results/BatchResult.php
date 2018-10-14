@@ -18,11 +18,17 @@ class BatchResult implements \ArrayAccess, \Countable, \IteratorAggregate
      * @var Result[]
      */
     protected $responses;
-    
-    public function __construct($data, $responses)
+
+    /**
+     * @var Result[]
+     */
+    protected $rejected;
+
+    public function __construct($data, $responses, $rejected)
     {
         $this->data = $data;
         $this->responses = $responses;
+        $this->rejected = $rejected;
     }
 
     public static function fromSettledPromises(array $results)
@@ -31,7 +37,6 @@ class BatchResult implements \ArrayAccess, \Countable, \IteratorAggregate
             return $inspection['state'] === Promise::FULFILLED;
         });
         
-        // TODO: Add access to rejected responses
         $rejected = array_filter($results, function ($inspection) {
             return $inspection['state'] === Promise::REJECTED;
         });
@@ -58,8 +63,8 @@ class BatchResult implements \ArrayAccess, \Countable, \IteratorAggregate
         $data = array_map(function (Result $response) {
             return \GuzzleHttp\json_decode((string) $response->getResponse()->getBody(), true);
         }, $responses);
-        
-        return new self($data, $responses);
+
+        return new self($data, $responses, $rejected);
     }
 
     /**
@@ -76,6 +81,14 @@ class BatchResult implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getResponses()
     {
         return $this->responses;
+    }
+
+    /**
+     * @return Result[]
+     */
+    public function getRejected()
+    {
+        return $this->rejected;
     }
 
     /**
