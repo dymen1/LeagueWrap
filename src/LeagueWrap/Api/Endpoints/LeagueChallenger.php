@@ -6,7 +6,7 @@ use LeagueWrap\Api\BaseEndpoint;
 use LeagueWrap\Api\Dto;
 
 class LeagueChallenger extends BaseEndpoint {
-    protected $urlTemplate = '/lol/league/v3/challengerleagues/by-queue/{queue}';
+    protected $urlTemplate = '/lol/league/v4/challengerleagues/by-queue/{queue}';
     
     protected $isRateLimited = true;
     

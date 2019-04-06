@@ -6,7 +6,7 @@ use LeagueWrap\Api\BaseEndpoint;
 use LeagueWrap\Api\Dto;
 
 class LeagueMaster extends BaseEndpoint {
-    protected $urlTemplate = '/lol/league/v3/masterleagues/by-queue/{queue}';
+    protected $urlTemplate = '/lol/league/v4/masterleagues/by-queue/{queue}';
     
     protected $isRateLimited = true;
     

@@ -6,7 +6,7 @@ use LeagueWrap\Api\BaseEndpoint;
 use LeagueWrap\Api\Dto;
 
 class LeaguePositionById extends BaseEndpoint {
-    protected $urlTemplate = '/lol/league/v3/positions/by-summoner/{summonerId}';
+    protected $urlTemplate = '/lol/league/v4/positions/by-summoner/{summonerId}';
     
     protected $isRateLimited = true;
     
